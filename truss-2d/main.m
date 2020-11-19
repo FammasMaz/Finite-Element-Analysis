@@ -182,6 +182,7 @@ for i=1:elem_num
   endif
   if motion_axes == 3
     strain(i) = ((c * u(node_b*3-2)) + (s * u(node_b*3-1)) + (v*u(node_b*3)) - (c * u(node_a*3-2)) - (s * u(node_a*3-1)) - (v*u(node_a*3))) / l(i);
+  %  strain(e) = ((c * u(j*3-2)) + (s * u(j*3-1)) + (v*u(j*3))) - ((c * u(i*3-2)) + (s * u(i*3-1)) + (v*u(i*3))) / l(e);
   endif
   % Strain, Stress and Axial Load calculations from theoretical formulae
   strain(i) = ((c * u(node_b*2-1)) + (s * u(node_b*2)) - (c * u(node_a*2-1)) - (s * u(node_a*2))) / l(i);
