@@ -3,7 +3,7 @@
 
 % The coordinates of nodes
 % [x, y, z] positions, row represents node number
-nXY = [
+nodalCord = [
   0 60 0 % z free
   0 0 24
   0 0 -24
@@ -11,7 +11,7 @@ nXY = [
 ];
 
 % [node_i, node_j,  material_prop], row represents truss element number
-eProp = [
+elem_prop = [
   1 4 1
   1 2 2
   1 3 2
@@ -23,7 +23,7 @@ eProp = [
 
 % Boundary conditions on any given trusses
 % [node_id, x_axis_condition, y_axis_condition] where 1 = fixed; 0 = free
-bc = [
+bound_con = [
 1 1 1 1
 2 1 1 1
 3 1 1 1
@@ -31,13 +31,13 @@ bc = [
 
 % Material Properties and Area of the Cross_sec area of the elements
 % [mod_of_elasticity, cross_area], where each row is a different material
-mater = [
+mat_prop = [
 29e6 0.5
 11e6 1
 ];
 
 % Specifies any loads on any nodes
 % [node_id, Fx, Fy]
-loads = [
+loadings = [
 4 0 -1500 0
 ];
