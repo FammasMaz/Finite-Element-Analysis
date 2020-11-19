@@ -1,4 +1,4 @@
-function [u_spat,u, strain, stress, K, axForce] = main(data)
+function [u_spat,u,U, strain, stress, K, axForce] = main(data)
 % Description:-
 %  - Solves the plane truss problems, automatically judging whether the problem
 % is 3D or 2D
@@ -182,10 +182,10 @@ for i=1:elem_num
   endif
   if motion_axes == 3
     strain(i) = ((c * u(node_b*3-2)) + (s * u(node_b*3-1)) + (v*u(node_b*3)) - (c * u(node_a*3-2)) - (s * u(node_a*3-1)) - (v*u(node_a*3))) / l(i);
-  %  strain(e) = ((c * u(j*3-2)) + (s * u(j*3-1)) + (v*u(j*3))) - ((c * u(i*3-2)) + (s * u(i*3-1)) + (v*u(i*3))) / l(e);
+  else
+    strain(i) = ((c * u(node_b*2-1)) + (s * u(node_b*2)) - (c * u(node_a*2-1)) - (s * u(node_a*2))) / l(i);
   endif
   % Strain, Stress and Axial Load calculations from theoretical formulae
-  strain(i) = ((c * u(node_b*2-1)) + (s * u(node_b*2)) - (c * u(node_a*2-1)) - (s * u(node_a*2))) / l(i);
   stress(i) = mat_prop(struct_prop, 1) * strain(i);
   axForce(i) = mat_prop(struct_prop, 2) * stress(i);
 
