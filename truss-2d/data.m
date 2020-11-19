@@ -3,7 +3,7 @@
 
 % The coordinates of nodes
 % [x, y, z] positions, row represents node number
-nXYZ = [
+nXY = [
   0 60 0 % z free
   0 0 24
   0 0 -24
@@ -13,11 +13,11 @@ nXYZ = [
 % [node_i, node_j,  material_prop], row represents truss element number
 eProp = [
   1 4 1
-  1 2 0
-  1 3 0
-  2 3 0
-  2 4 0
-  3 4 0
+  1 2 2
+  1 3 2
+  2 3 2
+  2 4 2
+  3 4 2
 ];
 
 
