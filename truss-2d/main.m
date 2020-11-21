@@ -1,4 +1,4 @@
-function [u_spat,u,U, strain, stress, K, axForce] = main(data)
+function [u_spat, strain, stress, axForce] = main(data)
 % Description:-
 %  - Solves the plane truss problems, automatically judging whether the problem
 % is 3D or 2D
@@ -53,16 +53,16 @@ for i=1:elem_num
   struct_prop = elem_prop(i, 3); % Material properties row tag
 
   % Coordinates of the first node
-  x_node_a = nodalCord(node_a, 1)
-  y_node_a = nodalCord(node_a, 2)
+  x_node_a = nodalCord(node_a, 1);
+  y_node_a = nodalCord(node_a, 2);
   if motion_axes == 3
-    z_node_a = nodalCord(node_a, 3)
+    z_node_a = nodalCord(node_a, 3);
   endif
   % Coordinates of the second node
-  x_node_b = nodalCord(node_b, 1)
-  y_node_b = nodalCord(node_b, 2)
+  x_node_b = nodalCord(node_b, 1);
+  y_node_b = nodalCord(node_b, 2);
   if motion_axes == 3
-    z_node_b = nodalCord(node_b, 3)
+    z_node_b = nodalCord(node_b, 3);
   endif
 
   if motion_axes ==3
@@ -114,9 +114,10 @@ for i = 1:size(loadings, 1)
   F(motion_axes*loadings(i,1)-(motion_axes-1)) = loadings(i, 2); % X-Coordinate
   F(motion_axes*loadings(i,1)-(motion_axes-2)) = loadings(i, 3); % Y-Coordinate
   if motion_axes ==3
-    F(motion_axes*loadings(i,1)) = loadings(i, 4) % Z-Coordinate
+    F(motion_axes*loadings(i,1)) = loadings(i, 4); % Z-Coordinate
   endif
 endfor
+
 
 % finding row to thin-down matrix, considering boundary conditions
 % and removing matrix singularity
@@ -128,13 +129,13 @@ for n = 1:size(bound_con, 1)
   bcrem((motion_axes*bound_con(n,1)-(motion_axes-1)):motion_axes*bound_con(n,1)) = bound_con(n,2:(motion_axes+1));
 
 endfor
-
 rmK = K(~bcrem, ~bcrem); % Removing the corresponding rows and columns of bcrem
 newF = F(~bcrem); % Removing the corresponding rows of bcrem
 
 
 % Matrix Solution to [K]{u} = {F}
 U = rmK\newF;
+
 
 % Rentering the previosuly removed nodal data
 x = 1;
@@ -197,7 +198,7 @@ for i=1:DOF/3
    u_spat(i,1) = u(motion_axes*i-(motion_axes-1));
    u_spat(i,2) = u(motion_axes*i-(motion_axes-2));
    if motion_axes == 3
-     u_spat(i,3) = u(3*i)
+     u_spat(i,3) = u(3*i);
    endif
 endfor
 
